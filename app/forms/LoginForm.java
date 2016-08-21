@@ -23,7 +23,7 @@ public class LoginForm
         User user = User.authenticate(email, password);
         if(user == null)
         {
-            errors.add(new ValidationError("message", "Email already exists"));
+            errors.add(new ValidationError("message", "Email already exists/Password is Wrong"));
             errors.add(new ValidationError("error", "true"));
         }
         return errors;
@@ -32,15 +32,12 @@ public class LoginForm
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }

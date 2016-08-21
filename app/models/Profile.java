@@ -19,14 +19,15 @@ public class Profile extends Model{
     public Long id;
 
     public String firstName;
-
     public String lastName;
-
     public String company;
 
-
-    public Profile(String firstName, String lastName) {
+    public Profile(String firstName, String lastName)
+    {
         this.firstName = firstName;
         this.lastName = lastName;
-    }
+
+    }    public static Finder<Long, Profile> find = new Finder<Long, Profile>(Profile.class);
+
 }
+

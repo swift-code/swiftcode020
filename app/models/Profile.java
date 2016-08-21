@@ -1,40 +1,32 @@
-package controllers;
+package models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import forms.SignupForm;
-import models.Profile;
-import models.User;
-import play.data.Form;
-import play.data.FormFactory;
-import play.mvc.Controller;
-import play.mvc.Result;
+import com.avaje.ebean.Model;
+import scala.Option;
 
-import javax.inject.Inject;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by lubuntu on 8/21/16.
  */
-public class Application extends Controller {
-    @Inject
-    FormFactory FormFactory;
+@Entity
+public class Profile extends Model{
 
-    @Inject
-    ObjectMapper objectMapper;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long id;
 
-    public Result signup() {
-        Form<SignupForm>  form = FormFactory.form(SignupForm.class).bindFromRequest();
-        if(form.hasErrors()) {
-            return ok(form.errorsAsJson());
-        }
-        Profile profile = new Profile(form.data().get("firstname"), form.data().get("lastname"));
-        Profile.db().save(profile);
+    public String firstName;
 
-        User user = new User(form.data().get("email"), form.data().get("password"));
-        user.profile = profile;
-        User.db().save(user);
+    public String lastName;
 
-        return ok((JsonNode) objectMapper.valueToTree(user));
+    public String company;
+
+
+    public Profile(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
-
 }

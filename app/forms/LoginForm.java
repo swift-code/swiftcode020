@@ -19,7 +19,7 @@ public class LoginForm
 
     public List<ValidationError> validate()
     {
-        List<ValidationError> errors new ArrayList<>();
+        List<ValidationError> errors = new ArrayList<>();
         User user = User.authenticate(email, password);
         if(user == null)
         {

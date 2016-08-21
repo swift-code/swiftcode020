@@ -49,8 +49,9 @@ public class User extends Model{
         {
             return user;
         }
+        return null;
     }
-    return null;
+
 
     public User(String email,String password)
     {
